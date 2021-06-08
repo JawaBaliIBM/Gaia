@@ -2,7 +2,6 @@ let iframe;
 
 chrome.runtime.onMessage.addListener(function(msg, sender){
   if(msg.message == "gaiaPopup"){
-      console.log("data", msg.data);
       toggle();
   }
 })
