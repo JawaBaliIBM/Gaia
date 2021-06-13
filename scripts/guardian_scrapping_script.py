@@ -80,5 +80,3 @@ try:
 except Exception as e:
     logging.exception('Got exception while trying to crawl data. Exception: %s',
         e)
-
-print(dumps(result))
