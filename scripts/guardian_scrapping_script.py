@@ -80,3 +80,5 @@ try:
 except Exception as e:
     logging.exception('Got exception while trying to crawl data. Exception: %s',
         e)
+
+# TODO: add functionality to upload to Object Storage
