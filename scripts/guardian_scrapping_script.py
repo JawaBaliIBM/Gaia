@@ -78,7 +78,7 @@ try:
             data_total = json_body['response']['total']
         page += 1
 except Exception as e:
-    logging.error('Got exception while trying to crawl data. Exception: %s',
+    logging.exception('Got exception while trying to crawl data. Exception: %s',
         e)
 
 print(dumps(result))
