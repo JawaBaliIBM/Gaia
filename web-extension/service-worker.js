@@ -29,7 +29,7 @@ function showPopup(info,tab) {
 }
 
 chrome.contextMenus.create({
-  title: "Search: %s", 
+  title: "Check '%s' on Gaia", 
   contexts:["selection"], 
   id: CONTEXT_MENU_ID,
 });
