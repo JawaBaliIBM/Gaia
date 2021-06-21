@@ -6,6 +6,7 @@
     - fellitacandini@gmail.com
     - rmayiffah@gmail.com
 """
+from file_uploader import upload_fileobj
 import os, requests, json, re, datetime, logging
 
 QUERY_URL = "https://content.guardianapis.com/search?" \
@@ -22,7 +23,8 @@ HTML_SUBS = [
 
 API_KEY = os.getenv('API_KEY')
 PAGE_SIZE = int(os.getenv('PAGE_SIZE'))
-FROM_DATE = datetime.datetime.now().strftime(DATE_FORMAT)
+FROM_DATE = '2021-06-21'
+# FROM_DATE = datetime.datetime.now().strftime(DATE_FORMAT)
 
 def dumps(obj):
     return json.dumps(obj, sort_keys=True, indent=4)
@@ -57,28 +59,37 @@ def construct_url(page):
         page_size = PAGE_SIZE
     )
 
-data_len = 0
-data_total = PAGE_SIZE
-page = 1
-result = list()
-try:
-    while data_len < data_total:
-        url = construct_url(page)
-        response = requests.get(url)
-        json_body = response.json()
-        if 'error' in json_body:
-            logging.error('The requested query resulted error. Query: %s',
-                url)
-            break
+def scrape_data():
+    data_len = 0
+    data_total = PAGE_SIZE
+    page = 1
+    result = list()
+    try:
+        while data_len < data_total:
+            url = construct_url(page)
+            response = requests.get(url)
+            json_body = response.json()
+            if 'error' in json_body:
+                logging.error('The requested query resulted error. Query: %s',
+                    url)
+                break
 
-        cleaned_data = clean_data(json_body['response']['results'])
-        result.extend(cleaned_data)
-        data_len += PAGE_SIZE
-        if data_total != json_body['response']['total']:
-            data_total = json_body['response']['total']
-        page += 1
-except Exception as e:
-    logging.exception('Got exception while trying to crawl data. Exception: %s',
-        e)
+            cleaned_data = clean_data(json_body['response']['results'])
+            result.extend(cleaned_data)
+            data_len += PAGE_SIZE
+            if data_total != json_body['response']['total']:
+                data_total = json_body['response']['total']
+            page += 1
+    except Exception as e:
+        logging.exception('Got exception while trying to crawl data. Exception: %s',
+            e)
 
-# TODO: add functionality to upload to Object Storage
+    filename = 'guardian-news-{}.json'.format(FROM_DATE)
+    try:
+        if len(result) > 0:
+            upload_fileobj(dumps(result), filename)
+    except Exception as e:
+        return {'success': False, 'errorMessage': e}
+    else:
+        # TODO: call api gaia service
+        return {'success': True, 'filename': filename}
