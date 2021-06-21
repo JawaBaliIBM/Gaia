@@ -93,3 +93,5 @@ def scrape_data():
     else:
         # TODO: call api gaia service
         return {'success': True, 'filename': filename}
+
+scrape_data()
