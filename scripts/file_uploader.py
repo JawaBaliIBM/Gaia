@@ -12,3 +12,4 @@ def upload_fileobj(json_str, filename):
     res = cos.upload_fileobj(data,
             os.getenv('BUCKET_NAME'), filename)
     data.close()
+    

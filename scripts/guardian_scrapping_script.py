@@ -23,8 +23,7 @@ HTML_SUBS = [
 
 API_KEY = os.getenv('API_KEY')
 PAGE_SIZE = int(os.getenv('PAGE_SIZE'))
-FROM_DATE = '2021-06-21'
-# FROM_DATE = datetime.datetime.now().strftime(DATE_FORMAT)
+FROM_DATE = datetime.datetime.now().strftime(DATE_FORMAT)
 
 def dumps(obj):
     return json.dumps(obj, sort_keys=True, indent=4)
