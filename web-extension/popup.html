@@ -3,7 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="navbar card">
+    <img src="./gaia logo.png" alt="Gaia">
+  </div>
+  <div class="header card">
+    <p class="header__title"> Brand Name </p>
+    <span class="header__subtitle">
+      <img src='./images/indicator-red.png'/>
+      16% eco-friendly brand
+    <span>
+  </div>
+  <div class="container">
+    <div class="content card">
+      <div class="content__indicator--red"></div>
+      <div class="conent__text">
+        <a href="" class="content__title">
+          Takeaway food and drink litter dominates ocean plastic, study shows that lorem ipsum dolor
+        </a>
+        <p class="content__body">
+          Plastic items from takeaway food and drink dominate the litter in the world’s oceans, according to the most comprehensive study to date.
+        </p>
+        <p class="content__date">Thu 10 Jun 2021 16.41 BST</p>
+      </div>
+    </div>
+
+    <div class="content card">
+      <div class="content__indicator--green"></div>
+      <div class="conent__text">
+        <a href="" class="content__title">
+          Takeaway food and drink litter dominates ocean plastic, study shows that lorem ipsum dolor
+        </a>
+        <p class="content__body">
+          Plastic items from takeaway food and drink dominate the litter in the world’s oceans, according to the most comprehensive study to date.
+        </p>
+        <p class="content__date">Thu 10 Jun 2021 16.41 BST</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
+<style type="text/css">
+  body{
+    background: #F1F3F4;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .card {
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    background: white;
+    border: 1px #EBEDEF solid;
+  }
+
+  .navbar img {
+    display: block;
+    margin: auto;
+  }
+
+  .header__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 4px 0;
+  }
+
+  .header__subtitle {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 100;
+    padding: 4px 0;
+  }
+
+  .content {
+    margin-top: 8px;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .content__indicator--red {
+    background: #EE5656;
+    width: 14px;
+    margin-right: 16px;
+  }
+
+  .content__indicator--green {
+    background: #C4CE46;
+    width: 14px;
+    margin-right: 16px;
+  }
+
+  .content__title {
+    font-size: 20px;
+    color: #1558D6;
+    text-decoration: none;
+  }
+
+  .content__body {
+    font-size: 14px;
+    color: #3C4043;
+  }
+
+  .content__date {
+    font-size: 10px;
+    color: #202124;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 8px;
+  }
+</style>
