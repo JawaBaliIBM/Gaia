@@ -1,8 +1,10 @@
 const CONTEXT_MENU_ID = "GAIA_CONTEXT_MENU";
+let page = 1;
 
-async function getCompanyData(companyName) {
+
+async function getCompanyData(companyName, page) {
   try {
-    const API_URL = 'https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies';
+    const API_URL = `https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies?page=${page}`;
     const data = await fetch(API_URL, {
       body: companyName,
     });
@@ -14,9 +16,8 @@ async function getCompanyData(companyName) {
 }
 
 function showPopup(info,tab) {
-  const companyName = info.selectiontext;
-  const data = getCompanyData(companyName);
-  
+  const companyName = sessionStorage.getItem("gaiaCompanyName");
+  const data = getCompanyData(companyName, page);
   if (data) {
     chrome.tabs.sendMessage(
       tab.id, 
@@ -35,5 +36,15 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener(
-  (info, tab) => showPopup(info,tab)
+  (info, tab) => {
+    sessionStorage.setItem("gaiaCompanyName", info.selectiontext);
+    showPopup(info,tab)
+  } 
 );
+
+chrome.runtime.onMessage.addListener(function(msg, sender){
+  if(msg.message == "gaiaHalfScroll"){
+      page++;
+      showPopup(msg, sender)
+  }
+})
