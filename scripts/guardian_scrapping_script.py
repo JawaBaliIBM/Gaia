@@ -7,7 +7,12 @@
     - rmayiffah@gmail.com
 """
 from file_uploader import upload_fileobj
-import os, requests, json, re, datetime, logging
+import os
+import requests
+import json
+import re
+import datetime
+import logging
 
 QUERY_URL = "https://content.guardianapis.com/search?" \
             "section=environment&show-fields=trailText%2Cbody" \
@@ -17,21 +22,23 @@ QUERY_URL = "https://content.guardianapis.com/search?" \
             "&page-size={page_size}"
 DATE_FORMAT = "%Y-%m-%d"
 HTML_SUBS = [
-        ('<br.*?>', '/n'),
-        ('<.*?>', '')
-    ]
+    ('<br.*?>', '/n'),
+    ('<.*?>', '')
+]
 
 API_KEY = os.getenv('API_KEY')
 PAGE_SIZE = int(os.getenv('PAGE_SIZE'))
 FROM_DATE = datetime.datetime.now().strftime(DATE_FORMAT)
 
+
 def dumps(obj):
     return json.dumps(obj, sort_keys=True, indent=4)
+
 
 def clean_html(raw_html):
     for pattern, replacement in HTML_SUBS:
         cleaned_html = re.sub(re.compile(pattern), replacement, raw_html)
-    
+
     return cleaned_html
 
 
@@ -47,16 +54,19 @@ def map_data(data):
         'article': article
     }
 
+
 def clean_data(data_list):
     return [map_data(x) for x in data_list]
 
+
 def construct_url(page):
     return QUERY_URL.format(
-        from_date = FROM_DATE,
-        api_key = API_KEY,
-        page = page,
-        page_size = PAGE_SIZE
+        from_date=FROM_DATE,
+        api_key=API_KEY,
+        page=page,
+        page_size=PAGE_SIZE
     )
+
 
 def scrape_data():
     data_len = 0
@@ -70,7 +80,7 @@ def scrape_data():
             json_body = response.json()
             if 'error' in json_body:
                 logging.error('The requested query resulted error. Query: %s',
-                    url)
+                              url)
                 break
 
             cleaned_data = clean_data(json_body['response']['results'])
@@ -81,16 +91,14 @@ def scrape_data():
             page += 1
     except Exception as e:
         logging.exception('Got exception while trying to crawl data. Exception: %s',
-            e)
+                          e)
+        return {'success': False, 'errorMessage': e}
 
     filename = 'guardian-news-{}.json'.format(FROM_DATE)
-    try:
-        if len(result) > 0:
-            upload_fileobj(dumps(result), filename)
-    except Exception as e:
-        return {'success': False, 'errorMessage': e}
-    else:
-        # TODO: call api gaia service
-        return {'success': True, 'filename': filename}
+    if len(result) < 1:
+        return {'success': False, 'errorMessage': 'No news in {}'.format(FROM_DATE)}
+
+    return upload_fileobj(dumps(result), filename)
+
 
 scrape_data()
