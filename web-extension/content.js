@@ -1,8 +1,10 @@
 let iframe;
 
+const url = chrome.runtime.getURL("popup.html");
+
 chrome.runtime.onMessage.addListener(function(msg, sender){
-  if(msg.message == "gaiaPopup"){
-      toggle();
+  if(msg.message == "show-gaia-popup"){
+    changeIframeName(msg.company);
   }
 })
 
@@ -17,18 +19,17 @@ function initIframe() {
   iframe.style.right = "0px";
   iframe.style.zIndex = "9000000000000000000";
   iframe.frameBorder = "none"; 
-  iframe.src = chrome.runtime.getURL("popup.html")
+  iframe.id = 'gaia-iframe';
+  iframe.src = `${url}`;
 
   document.body.appendChild(iframe);
 }
 
-function toggle(){
+function changeIframeName(companyName){
   if(iframe.style.width == "0px"){
     iframe.style.width="400px";
   }
-  else{
-    iframe.style.width="0px";
-  }
+  iframe.src = `${url}?company=${companyName}`;
 }
 
 initIframe();
