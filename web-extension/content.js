@@ -1,6 +1,5 @@
 let iframe;
-
-const url = chrome.runtime.getURL("popup.html");
+const URL = chrome.runtime.getURL("popup.html");
 
 chrome.runtime.onMessage.addListener(function(msg, sender){
   if(msg.message == "show-gaia-popup"){
@@ -8,19 +7,16 @@ chrome.runtime.onMessage.addListener(function(msg, sender){
   }
 })
 
-// TODO: fix size of popup and style
 function initIframe() {
   iframe = document.createElement('iframe'); 
   iframe.style.background = "white";
-  iframe.style.height = "100%";
+  iframe.style.height = "600px";
   iframe.style.width = "0px";
   iframe.style.position = "fixed";
-  iframe.style.top = "0px";
-  iframe.style.right = "0px";
+  iframe.style.top = "5px";
+  iframe.style.right = "5px";
   iframe.style.zIndex = "9000000000000000000";
-  iframe.frameBorder = "none"; 
-  iframe.id = 'gaia-iframe';
-  iframe.src = `${url}`;
+  iframe.src = `${URL}`;
 
   document.body.appendChild(iframe);
 }
@@ -29,7 +25,7 @@ function changeIframeName(companyName){
   if(iframe.style.width == "0px"){
     iframe.style.width="400px";
   }
-  iframe.src = `${url}?company=${companyName}`;
+  iframe.src = `${URL}?company=${companyName}`;
 }
 
 initIframe();

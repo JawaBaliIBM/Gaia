@@ -1,15 +1,32 @@
 const companyName = document.location.search.split('company=')[1];
 let currentPage = 0;  
 
-async function getCompanyData(companyName, page) {
-  try {
-    console.log('get company data', page);
-    const API_URL = `https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies?page=${page}`;
-    const data = await fetch(API_URL).then((res) => (res.json()));
-    return data;
-  } catch(e) {
-    console.error(e);
-    return null;
+document.getElementById('content-container').addEventListener('scroll', throttle(function(){
+    addDataOnScroll();
+}, 300));
+
+function throttle(func, timeFrame) {
+  var lastTime = 0;
+  return function (...args) {
+      var now = new Date();
+      if (now - lastTime >= timeFrame) {
+          func(...args);
+          lastTime = now;
+      }
+  };
+}
+
+async function addDataOnScroll() {
+  const {
+    scrollTop,
+    scrollHeight,
+    clientHeight
+  } = document.getElementById('content-container');
+
+  if (scrollTop + clientHeight >= scrollHeight - 15) {
+    currentPage++;
+    const datas = await getCompanyData(companyName, currentPage);
+    renderCardData(datas); 
   }
 }
 
@@ -35,20 +52,18 @@ function renderCardData(datas) {
   });
 }
 
-window.addEventListener('scroll', async () => {
-  const {
-    scrollTop,
-    scrollHeight,
-    clientHeight
-  } = document.documentElement;
-
-  if (scrollTop + clientHeight >= scrollHeight - 15) {
-
-    currentPage++;
-    const datas = await getCompanyData(companyName, currentPage);
-    renderCardData(datas); 
+async function getCompanyData(companyName, page) {
+  try {
+    const API_URL = `https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies?page=${page}`;
+    const data = await fetch(API_URL).then(
+      (res) => (res.json())
+    );
+    return data;
+  } catch(e) {
+    console.error(e);
+    return null;
   }
-});
+}
 
 async function init() {  
   document.getElementById('brand-name').innerHTML = companyName;
