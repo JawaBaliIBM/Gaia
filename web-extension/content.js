@@ -16,6 +16,7 @@ function initIframe() {
   iframe.style.top = "5px";
   iframe.style.right = "5px";
   iframe.style.zIndex = "9000000000000000000";
+  iframe.frameBorder = "none"; 
   iframe.src = `${URL}`;
 
   document.body.appendChild(iframe);
