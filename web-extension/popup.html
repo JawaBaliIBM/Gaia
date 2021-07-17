@@ -6,45 +6,27 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-  <div class="navbar card">
-    <img src="./gaia logo.png" alt="Gaia">
-  </div>
-  <div class="header card">
-    <p class="header__title"> Brand Name </p>
-    <span class="header__subtitle">
-      <img src='./images/indicator-red.png'/>
-      16% eco-friendly brand
-    <span>
-  </div>
+  <button type="button" class="close" id="close-button" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <div class="container">
-    <div class="content card">
-      <div class="content__indicator--red"></div>
-      <div class="conent__text">
-        <a href="" class="content__title">
-          Takeaway food and drink litter dominates ocean plastic, study shows that lorem ipsum dolor
-        </a>
-        <p class="content__body">
-          Plastic items from takeaway food and drink dominate the litter in the world’s oceans, according to the most comprehensive study to date.
-        </p>
-        <p class="content__date">Thu 10 Jun 2021 16.41 BST</p>
-      </div>
+    <div class="navbar card">
+      <img src="./gaia logo.png" alt="Gaia">
     </div>
-
-    <div class="content card">
-      <div class="content__indicator--green"></div>
-      <div class="conent__text">
-        <a href="" class="content__title">
-          Takeaway food and drink litter dominates ocean plastic, study shows that lorem ipsum dolor
-        </a>
-        <p class="content__body">
-          Plastic items from takeaway food and drink dominate the litter in the world’s oceans, according to the most comprehensive study to date.
-        </p>
-        <p class="content__date">Thu 10 Jun 2021 16.41 BST</p>
-      </div>
+    <div class="header card">
+      <p class="header__title" id="brand-name"> Brand Name </p>
+      <span class="header__subtitle">
+        <img src='./images/indicator-red.png'/>
+        16% eco-friendly brand
+      <span>
+    </div>
+    <div id="content-container">
     </div>
   </div>
+  <script src="event-listener.js" defer></script>
 </body>
 </html>
 
@@ -53,11 +35,13 @@
     background: #F1F3F4;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    border: 1px solid rgba(0,0,0,0.2);
   }
 
   .card {
     padding: 8px 16px;
     margin-bottom: 8px;
+    margin-right: 8px;
     background: white;
     border: 1px #EBEDEF solid;
   }
@@ -65,6 +49,10 @@
   .navbar img {
     display: block;
     margin: auto;
+  }
+
+  .container {
+    margin-top: 30px;
   }
 
   .header__title {
@@ -86,16 +74,27 @@
     flex-grow: 1;
   }
 
-  .content__indicator--red {
-    background: #EE5656;
-    width: 14px;
-    margin-right: 16px;
+  #content-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px
   }
 
-  .content__indicator--green {
-    background: #C4CE46;
-    width: 14px;
-    margin-right: 16px;
+  #content-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+  
+  #content-container::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  #content-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #c1c1c1;
   }
 
   .content__title {
@@ -114,8 +113,41 @@
     color: #202124;
   }
 
-  .footer {
-    text-align: center;
-    font-size: 8px;
+  /*Loading Animation*/
+  .loader {
+    display: inline-flex;
+    flex-direction: column; 
+    vertical-align: top; 
+  }
+
+  .shine {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px; 
+    display: inline-block;
+    position: relative; 
+    
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+  }
+
+  lines {
+    height: 10px;
+    margin-top: 10px;
+    width: 347px; 
+  }
+
+  @-webkit-keyframes placeholderShimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    
+    100% {
+      background-position: 468px 0; 
+    }
   }
 </style>
