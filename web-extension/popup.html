@@ -18,10 +18,13 @@
     </div>
     <div class="header card">
       <p class="header__title" id="brand-name"> Brand Name </p>
-      <span class="header__subtitle">
+      <span class="header__subtitle" id='brand-indicator'>
         <img src='./images/indicator-red.png'/>
         16% eco-friendly brand
       <span>
+    </div>
+    <div class="alert alert-danger hide" role="alert" id="error-container">
+      Something's wrong happens
     </div>
     <div id="content-container">
     </div>
@@ -149,5 +152,50 @@
     100% {
       background-position: 468px 0; 
     }
+  }
+
+  /*Empty CSS*/
+  .empty-state {
+    width: 100%;
+  }
+
+  .empty-state__content {
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .empty-state__icon {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: 200px;
+    justify-content: center;
+    background-color: #f7fafc;
+    box-shadow: 0px 2px 1px #e1e3ec;
+  }
+   
+  .empty-state__message {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.85rem;
+  }
+
+  /* alert show up animation*/
+
+  #error-container {
+    opacity: 1;
+    transition: opacity 1s;
+    position: fixed;
+    bottom: 5px;
+    left: 20px;
+    z-index: 99;
+    width: 85%;
+  }
+
+  #error-container.hide {
+    opacity: 0;
   }
 </style>

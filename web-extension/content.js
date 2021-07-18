@@ -5,7 +5,13 @@ chrome.runtime.onMessage.addListener(function(msg, sender){
   if(msg.message == "show-gaia-popup"){
     changeIframeName(msg.company);
   }
-})
+});
+
+window.addEventListener('message', function(event) {
+  if(event.data === 'closeIframe') {
+    iframe.style.width = "0px";
+  }
+});
 
 function initIframe() {
   iframe = document.createElement('iframe'); 
