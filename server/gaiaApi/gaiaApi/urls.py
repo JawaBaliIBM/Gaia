@@ -19,6 +19,11 @@ import sys
 sys.path.append("..")
 
 from quickstart import views
+from gaia.views import (
+    brand_detail,
+    article_list,
+    news_scraper
+)
 
 router = routers.DefaultRouter()
 router.register(r'greetings', views.GreetingsViewSet, basename='greetings')
@@ -26,5 +31,6 @@ router.register(r'greetings', views.GreetingsViewSet, basename='greetings')
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('', include('gaia.urls'))
 ]

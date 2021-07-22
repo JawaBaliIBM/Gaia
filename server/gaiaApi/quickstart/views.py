@@ -13,3 +13,4 @@ class GreetingsViewSet(viewsets.ViewSet):
         serializer = GreetingsSerializer(
             instance=payload, many=True)
         return Response(serializer.data)
+
