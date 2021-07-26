@@ -1,8 +1,11 @@
-const companyName = decodeURIComponent(document.location.search.split('company=')[1]);
-let currentPage = 0;  
+const COMPANY_NAME = decodeURIComponent(
+  document.location.search.split('company=')[1]
+).toLowerCase();
+
+let currentPage = 1;  
 
 document.getElementById('content-container').addEventListener('scroll', throttle(function(){
-    addDataOnScroll();
+  addDataOnScroll();
 }, 100));
 
 document.getElementById('close-button').addEventListener('click', (iframe) => {
@@ -28,15 +31,15 @@ async function addDataOnScroll() {
   } = document.getElementById('content-container');
 
   if (scrollTop + clientHeight >= scrollHeight - 15) {
-    currentPage++;
-    const datas = await getCompanyData(companyName, currentPage);
 
-    renderCardData(datas); 
+    const data = await getCompanyData(COMPANY_NAME, currentPage);
+    currentPage++;
+    renderCardData(data.result);
   }
 }
 
 function renderData(datas) {
-  if(!datas.length) {
+  if(!datas || datas.length === 0) {
     renderEmptyData();
   } else {
     renderCardData(datas);
@@ -47,7 +50,7 @@ function renderCardData(datas) {
   const cardString = (data) => 
   (`
     <div class="content__text">
-      <a href="" class="content__title">
+      <a href="${data.url}" target="_blank" class="content__title">
         ${data.title}
       </a>
       <p class="content__body">
@@ -57,14 +60,23 @@ function renderCardData(datas) {
     </div>
   `);
 
-  // TODO: change indicator status
-
   datas.map(data => {
     const contentCard = document.createElement('div');
     contentCard.className = `content card border-${data.sentiment ? 'success' : 'danger' }`;
     contentCard.innerHTML = cardString(data);
     document.getElementById('content-container').appendChild(contentCard);
   });
+}
+
+function renderIndicator(brandIndicator) {  
+  const percentage = brandIndicator.score * 100 || 0;
+  const indicator = brandIndicator.sentiment === 'positive' ? 'green' : 'red';
+
+  const brandIndicatorString = `
+  <img src='./images/indicator-${indicator}.png'/>
+        ${percentage}% eco-friendly brand
+  `
+  document.getElementById('brand-indicator').innerHTML = brandIndicatorString;
 }
 
 function renderEmptyData() {
@@ -103,8 +115,24 @@ function removeLoader() {
 
 async function getCompanyData(companyName, page) {
   addLoader();
+  try { 
+    const API_URL = `https://apigaia.us-south.cf.appdomain.cloud/articles/${companyName}/?page=${page}`;
+    const data = await fetch(API_URL).then(
+      (res) => (res.json())
+    );
+    removeLoader();
+    return data;
+  } catch(e) {
+    showError();
+    removeLoader();
+    return null;
+  }
+}
+
+async function getIndicator(companyName) {
+  addLoader();
   try {
-    const API_URL = `https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies?page=${page}`;
+    const API_URL = `https://apigaia.us-south.cf.appdomain.cloud/brand/${companyName}/`;
     const data = await fetch(API_URL).then(
       (res) => (res.json())
     );
@@ -127,10 +155,13 @@ function showError() {
 }
 
 async function init() {  
-  document.getElementById('brand-name').innerHTML = companyName;
+  document.getElementById('brand-name').innerHTML = COMPANY_NAME;
 
-  const datas = await getCompanyData(companyName, currentPage);
-  renderData(datas);  
+  const datas = await getCompanyData(COMPANY_NAME, currentPage);
+  renderData(datas.results);  
+
+  const brandResult = await getIndicator(COMPANY_NAME);
+  if(!brandResult.error_message) renderIndicator(brandResult); 
 }
 
 init();
