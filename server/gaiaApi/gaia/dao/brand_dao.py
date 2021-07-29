@@ -61,7 +61,7 @@ class BrandDao:
 
         selector = {'name': {'$eq': data.name}}
         doc = BrandDao.get_brand_by_name(data.name)
-        if doc is not None:
+        if doc is None:
             logging.error('Brand with name {} doesn\'t exist.'.format(data.name))
             return
 
