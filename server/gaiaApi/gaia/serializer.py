@@ -11,7 +11,13 @@ class ArticleSerializer(serializers.Serializer):
 
 class ArticlesSerializer(serializers.Serializer):
     prev = serializers.URLField()
-    next = serializers.URLField(allow_blank=False)
+    next = serializers.URLField()
+    results = serializers.ListField(child=ArticleSerializer())
+
+class ArticlesWithIndexSerializer(serializers.Serializer):
+    total = serializers.IntegerField()
+    prev = serializers.URLField()
+    next = serializers.URLField()
     results = serializers.ListField(child=ArticleSerializer())
 
 class BrandSerializer(serializers.Serializer):
