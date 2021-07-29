@@ -1,6 +1,4 @@
-import os, logging, sys
-sys.path.append("..")
-
+import os, logging
 from gaia.dao.db_client import db_client
 from gaia.dataclass.article import Article
 from gaia.dataclass.dataclass_utils import as_dict
@@ -41,7 +39,7 @@ class ArticleDao:
             logging.info("Create articles is success.")
 
     @staticmethod
-    def get_articles_by_brand(brand: str, page: int, limit=None):
+    def get_articles_by_brand_with_limit(brand: str, page: int, limit=None):
         logging.info('Get articles from brand {}'.format(brand))
 
         if limit is None:
@@ -52,6 +50,15 @@ class ArticleDao:
         result = db.get_query_result(selector, skip=skip, limit=limit ,raw_result=True)
 
         return [x for x in result['docs']]
+
+    @staticmethod
+    def get_articles_by_brand(brand: str):
+        logging.info('Get articles from brand {}'.format(brand))
+
+        selector = {'brand': {'$eq': brand}}
+        articles = db.get_query_result(selector)
+
+        return [x for x in articles]
 
 # article = Article(date='2008-09-17 14:02:00', sentiment=SentimentEnum.NEUTRAL, title='dummy', description='dummy', article_id='dummy', url='dummy', brand='dummy')
 # create_bulk_articles([article, article])

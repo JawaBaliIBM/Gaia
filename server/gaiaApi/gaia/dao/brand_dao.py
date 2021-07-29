@@ -50,7 +50,9 @@ class BrandDao:
         result = db.get_query_result(selector, raw_result=True, 
             limit=1)
 
-        return [x for x in result['docs']][0]
+        brand_results = [x for x in result['docs']]
+        
+        return None if len(brand_results) < 1 else brand_results[0]
 
     @staticmethod
     def edit_brand(data: Brand):
