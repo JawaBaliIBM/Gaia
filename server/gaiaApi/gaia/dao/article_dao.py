@@ -1,8 +1,9 @@
 import os, logging
+from typing import List
+
 from gaia.dao.db_client import db_client
 from gaia.dataclass.article import Article
 from gaia.dataclass.dataclass_utils import as_dict
-from gaia.enum.sentiment import SentimentEnum
 
 DATABASE_NAME = 'articles'
 db = db_client[DATABASE_NAME]
@@ -25,7 +26,7 @@ class ArticleDao:
             logging.info('Create an article is success.')
 
     @staticmethod
-    def create_bulk_articles(data: [Article]):
+    def create_bulk_articles(data: List[Article]):
         dict_data = [as_dict(x) for x in data]
         if dict_data[0] is None:
             logging.error('Create bulk articles failed because failed to convert to dictionary.')
