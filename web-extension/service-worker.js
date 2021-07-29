@@ -1,31 +1,13 @@
 const CONTEXT_MENU_ID = "GAIA_CONTEXT_MENU";
 
-async function getCompanyData(companyName) {
-  try {
-    const API_URL = 'https://5f05979fee44800016d383a7.mockapi.io/api/v4/companies';
-    const data = await fetch(API_URL, {
-      body: companyName,
-    });
-    return data;
-  } catch(e) {
-    console.error(e);
-    return null;
-  }
-}
-
 function showPopup(info,tab) {
-  const companyName = info.selectiontext;
-  const data = getCompanyData(companyName);
-  
-  if (data) {
-    chrome.tabs.sendMessage(
-      tab.id, 
-      { 
-        message: "gaiaPopup", 
-        data 
-      }
-    );
-  }
+  var companyName = info.selectionText;
+  const msg = {
+    message: 'show-gaia-popup',
+    company: companyName,
+  };
+
+  chrome.tabs.sendMessage(tab.id, msg);
 }
 
 chrome.contextMenus.create({
@@ -35,5 +17,7 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener(
-  (info, tab) => showPopup(info,tab)
+  (info, tab) => {
+    showPopup(info,tab);
+  } 
 );

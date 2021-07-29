@@ -3,7 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+  <button type="button" class="close" id="close-button" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="container">
+    <div class="navbar card">
+      <img src="./gaia logo.png" alt="Gaia">
+    </div>
+    <div class="header card">
+      <p class="header__title" id="brand-name"> Brand Name </p>
+      <span class="header__subtitle" id='brand-indicator'>
+        <img src='./images/indicator-red.png'/>
+        16% eco-friendly brand
+      <span>
+    </div>
+    <div class="alert alert-danger hide" role="alert" id="error-container">
+      Something's wrong happens
+    </div>
+    <div id="content-container">
+    </div>
+  </div>
+  <script src="event-listener.js" defer></script>
 </body>
 </html>
+
+<style type="text/css">
+  body{
+    background: #F1F3F4;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+
+  .card {
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    background: white;
+    border: 1px #EBEDEF solid;
+  }
+
+  .navbar img {
+    display: block;
+    margin: auto;
+  }
+
+  .container {
+    margin-top: 30px;
+  }
+
+  .header__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 4px 0;
+  }
+
+  .header__subtitle {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 100;
+    padding: 4px 0;
+  }
+
+  .content {
+    margin-top: 8px;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  #content-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px
+  }
+
+  #content-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+  
+  #content-container::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  #content-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #c1c1c1;
+  }
+
+  .content__title {
+    font-size: 20px;
+    color: #1558D6;
+    text-decoration: none;
+  }
+
+  .content__body {
+    font-size: 14px;
+    color: #3C4043;
+  }
+
+  .content__date {
+    font-size: 10px;
+    color: #202124;
+  }
+
+  /*Loading Animation*/
+  .loader {
+    display: inline-flex;
+    flex-direction: column; 
+    vertical-align: top; 
+  }
+
+  .shine {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px; 
+    display: inline-block;
+    position: relative; 
+    
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+  }
+
+  lines {
+    height: 10px;
+    margin-top: 10px;
+    width: 347px; 
+  }
+
+  @-webkit-keyframes placeholderShimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    
+    100% {
+      background-position: 468px 0; 
+    }
+  }
+
+  /*Empty CSS*/
+  .empty-state {
+    width: 100%;
+  }
+
+  .empty-state__content {
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .empty-state__icon {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: 200px;
+    justify-content: center;
+    background-color: #f7fafc;
+    box-shadow: 0px 2px 1px #e1e3ec;
+  }
+   
+  .empty-state__message {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.85rem;
+  }
+
+  /* alert show up animation*/
+
+  #error-container {
+    opacity: 1;
+    transition: opacity 1s;
+    position: fixed;
+    bottom: 5px;
+    left: 20px;
+    z-index: 99;
+    width: 85%;
+  }
+
+  #error-container.hide {
+    opacity: 0;
+  }
+</style>
