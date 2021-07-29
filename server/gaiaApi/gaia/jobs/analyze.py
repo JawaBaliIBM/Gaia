@@ -51,8 +51,6 @@ def analyze(filepath: Path) -> None:
             )
             articles.append(article)
 
-    print("articles:", len(articles))
-    print("ArticleDao.create_bulk_articles(articles)")
     ArticleDao.create_bulk_articles(articles)
 
     for doc in docs:
@@ -61,7 +59,6 @@ def analyze(filepath: Path) -> None:
             if is_existing_brand:
                 brands_to_update.append(brand)
             brand = brands_by_name.get(brand_name) or is_existing_brand
-            print("brand:", brand, is_existing_brand)
             if brand is None:
                 brand = Brand(
                     name=brand_name,
@@ -79,12 +76,9 @@ def analyze(filepath: Path) -> None:
 
             brands_by_name[brand_name] = brand
 
-    print("to create", brands_to_create[0])
-    print("to update", brands_to_update)
     BrandDao.create_bulk_brands(brands_to_create)
     for brand in brands_to_update:
         BrandDao.edit_brand(brand)
-    print("done creating & updating files:", len(brands_to_create), len(brands_to_update))
     os.remove(local_filepath)
 
 # analyze("data/dataset.json")

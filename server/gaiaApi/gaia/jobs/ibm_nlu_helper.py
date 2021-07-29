@@ -19,9 +19,9 @@ import nltk
 from gaia.enum.sentiment import SentimentHelper
 from gaia.dataclass.document import Document
 
-NLP_URL = os.environ.get("NLP_URL", "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/90738dd7-d0e0-4db9-875a-4e71efce92cd")
-NLP_API_KEY = os.environ.get("NLP_API_KEY", "wF5DNguy249ZABtRqW-3sLpIq7k3JDtObkcpLLevc3Cr")
-SENTIMENT_MODEL_ID = os.environ.get("SENTIMENT_MODEL_ID", "1f870c26-55af-4fe4-aac1-9b5796e76c99")
+NLP_URL = os.environ.get("NLP_URL", "nlp-url")
+NLP_API_KEY = os.environ.get("NLP_API_KEY", "nlp-key")
+SENTIMENT_MODEL_ID = os.environ.get("SENTIMENT_MODEL_ID", "model-id")
 
 ANALYZE_ENDPOINT = "/v1/analyze?version=2021-03-25"
 TRAIN_SENTIMENT_ENDPOINT = "/v1/models/sentiment"
