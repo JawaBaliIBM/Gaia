@@ -57,7 +57,7 @@ def analyze(filepath: Path) -> None:
         for brand_name in doc.sentiment.keys():
             existing_brand = BrandDao.get_brand_by_name(brand_name)
             if existing_brand is not None:
-                brands_to_update.append(brand)
+                brands_to_update.append(existing_brand)
             brand = brands_by_name.get(brand_name) or existing_brand
             if brand is None:
                 brand = Brand(
