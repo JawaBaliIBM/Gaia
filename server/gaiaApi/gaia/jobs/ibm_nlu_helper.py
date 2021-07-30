@@ -15,6 +15,7 @@ from typing import Dict, List
 from dataclasses import asdict
 
 import nltk
+nltk.download('punkt')
 
 from gaia.enum.sentiment import SentimentHelper
 from gaia.dataclass.document import Document

@@ -24,6 +24,7 @@ INDEX_URL_FORMAT = '{base_url}/?page={page}&page_size={page_size}'
 
 @csrf_exempt
 def article_list(request, brand_name):
+    brand_name = brand_name.lower()
     def handle_request_with_page_size(page, page_size):
         base_url = request.build_absolute_uri('/articles/{}'.format(brand_name))
 
@@ -89,36 +90,10 @@ def article_list(request, brand_name):
         return handle_request(page)
 
 @csrf_exempt
-def article_list_custom_limit(request, brand_name):
-
-    if request.method == 'GET':
-        page = request.GET.get('page')
-        page_size = request.GET.get('page_size')
-
-        try:
-            page = GaiaUtils.convert_positive_int(page)
-            limit = GaiaUtils.convert_positive_int(limit)
-        except Exception:
-            return JsonResponse(
-                        {'error_message': 'Param should be positive number'.format(page, page_size)}, status=402)
-
-        articles = ArticleDao.get_articles_by_brand(brand_name)
-        paginator = Paginator(articles, page_size)
-        result = {
-            'total': len(articles),
-            'page': page,
-            'page_size': page_size,
-            'results': paginator.page(page).object_list
-        }
-        serializer = ArticlesWithIndexSerializer(result)
-
-        return JsonResponse(serializer.data, safe=False, status=200)
-
-@csrf_exempt
 def brand_detail(request, name):
 
     if request.method == 'GET':
-        brand = BrandDao.get_brand_by_name(name)
+        brand = BrandDao.get_brand_by_name(name.lower())
         if brand is None:
             return JsonResponse({'error_message': 'Brand not found'}, status=404)
 

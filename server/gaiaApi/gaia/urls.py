@@ -3,8 +3,7 @@ from django.conf.urls import url
 from gaia.views import (
     brand_detail,
     article_list,
-    news_scraper,
-    article_list_custom_limit
+    news_scraper
 )
 
 # Wire up our API using automatic URL routing.

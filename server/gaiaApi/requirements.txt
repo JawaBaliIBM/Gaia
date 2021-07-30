@@ -14,3 +14,10 @@ requests==2.25.1
 sqlparse==0.4.1
 urllib3==1.26.6
 gunicorn
+ibm-cos-sdk==2.10.0
+ibm-cos-sdk-core==2.10.0
+ibm-cos-sdk-s3transfer==2.10.0
+idna==2.10
+jmespath==0.10.0
+python-dateutil==2.8.1
+six==1.16.0

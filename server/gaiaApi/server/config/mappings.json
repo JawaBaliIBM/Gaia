@@ -1,0 +1,152 @@
+{
+  "application_name": {
+    "searchPatterns": [
+      "cloudfoundry:$.application_name",
+      "env:K_SERVICE"
+    ]
+  },
+  "cloudObjectStorage_apikey": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.apikey",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_apikey"
+    ]
+  },
+  "cloudObjectStorage_endpoints": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.endpoints",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_endpoints"
+    ]
+  },
+  "cloudObjectStorage_iam_apikey_description": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.iam_apikey_description",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_iam_apikey_description"
+    ]
+  },
+  "cloudObjectStorage_iam_apikey_name": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.iam_apikey_name",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_iam_apikey_name"
+    ]
+  },
+  "cloudObjectStorage_iam_role_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.iam_role_crn",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_iam_role_crn"
+    ]
+  },
+  "cloudObjectStorage_iam_serviceid_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.iam_serviceid_crn",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_iam_serviceid_crn"
+    ]
+  },
+  "cloudObjectStorage_resource_instance_id": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.resource_instance_id",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_resource_instance_id"
+    ]
+  },
+  "cloudObjectStorage_serviceInfo": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloud-object-storage'][0].credentials.serviceInfo",
+      "file:/server/localdev-config.json:$.cloudObjectStorage_serviceInfo"
+    ]
+  },
+  "cloudant_apikey": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.apikey",
+      "file:/server/localdev-config.json:$.cloudant_apikey"
+    ]
+  },
+  "cloudant_host": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.host",
+      "file:/server/localdev-config.json:$.cloudant_host"
+    ]
+  },
+  "cloudant_iam_apikey_description": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.iam_apikey_description",
+      "file:/server/localdev-config.json:$.cloudant_iam_apikey_description"
+    ]
+  },
+  "cloudant_iam_apikey_name": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.iam_apikey_name",
+      "file:/server/localdev-config.json:$.cloudant_iam_apikey_name"
+    ]
+  },
+  "cloudant_iam_role_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.iam_role_crn",
+      "file:/server/localdev-config.json:$.cloudant_iam_role_crn"
+    ]
+  },
+  "cloudant_iam_serviceid_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.iam_serviceid_crn",
+      "file:/server/localdev-config.json:$.cloudant_iam_serviceid_crn"
+    ]
+  },
+  "cloudant_url": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.url",
+      "file:/server/localdev-config.json:$.cloudant_url"
+    ]
+  },
+  "cloudant_username": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.username",
+      "file:/server/localdev-config.json:$.cloudant_username"
+    ]
+  },
+  "cloudant_serviceInfo": {
+    "searchPatterns": [
+      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.serviceInfo",
+      "file:/server/localdev-config.json:$.cloudant_serviceInfo"
+    ]
+  },
+  "naturalLanguageUnderstanding_apikey": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.apikey",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_apikey"
+    ]
+  },
+  "naturalLanguageUnderstanding_iam_apikey_description": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.iam_apikey_description",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_iam_apikey_description"
+    ]
+  },
+  "naturalLanguageUnderstanding_iam_apikey_name": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.iam_apikey_name",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_iam_apikey_name"
+    ]
+  },
+  "naturalLanguageUnderstanding_iam_role_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.iam_role_crn",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_iam_role_crn"
+    ]
+  },
+  "naturalLanguageUnderstanding_iam_serviceid_crn": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.iam_serviceid_crn",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_iam_serviceid_crn"
+    ]
+  },
+  "naturalLanguageUnderstanding_url": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.url",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_url"
+    ]
+  },
+  "naturalLanguageUnderstanding_serviceInfo": {
+    "searchPatterns": [
+      "cloudfoundry:$['natural-language-understanding'][0].credentials.serviceInfo",
+      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_serviceInfo"
+    ]
+  }
+}
