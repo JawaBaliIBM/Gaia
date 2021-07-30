@@ -47,7 +47,7 @@ def analyze(filepath: Path) -> None:
                 description=doc.snippet,
                 article_id=doc.id,
                 url=doc.url,
-                brand=brand_name
+                brand=brand_name.lower()
             )
             articles.append(article)
 
@@ -55,6 +55,7 @@ def analyze(filepath: Path) -> None:
 
     for doc in docs:
         for brand_name in doc.sentiment.keys():
+            brand_name = brand_name.lower()
             existing_brand_dict = BrandDao.get_brand_by_name(brand_name)
             existing_brand = Brand.from_dict(existing_brand_dict) if existing_brand_dict is not None else None
             if existing_brand is not None:
@@ -72,8 +73,8 @@ def analyze(filepath: Path) -> None:
             article_sentiments = [SentimentHelper.encode_sentiment(article.sentiment) for article in articles]
             article_sentiment_score = sum(article_sentiments)
             num_articles = len(article_sentiments)
-            average_sentiment = article_sentiment_score // num_articles
-            brand.score = average_sentiment
+            average_sentiment = article_sentiment_score / num_articles
+            brand.score = (average_sentiment + num_articles) / (2 * num_articles)
             brand.sentiment = SentimentHelper.decode_sentiment(average_sentiment)
 
             brands_by_name[brand_name] = brand
