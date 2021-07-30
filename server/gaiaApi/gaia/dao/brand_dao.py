@@ -1,4 +1,5 @@
 import os, logging, sys
+from typing import List
 sys.path.append("..")
 
 from gaia.dao.db_client import db_client
@@ -18,7 +19,7 @@ class BrandDao:
             logging.error('Create brand failed because failed to convert to dictionary.')
             return
 
-        if len(get_brand_by_name(data.name)) > 0:
+        if BrandDao.get_brand_by_name(data.name) is not None:
             logging.error('Brand already exist')
             return
 
@@ -30,7 +31,10 @@ class BrandDao:
             logging.info('Create a brand is success.')
 
     @staticmethod
-    def create_bulk_brands(data: [Brand]):
+    def create_bulk_brands(data: List[Brand]):
+        if len(data) == 0:
+            logging.info('Create bulk articles skipped: no data is passed.')
+            return
         dict_data = [as_dict(x) for x in data]
         if dict_data[0] is None:
             logging.error('Create bulk articles failed because failed to convert to dictionary.')
@@ -59,10 +63,9 @@ class BrandDao:
         logging.info('Update brand with name {}'.format(data.name))
 
         selector = {'name': {'$eq': data.name}}
-        docs = get_brand_by_name(data.name)
-        if len(docs) > 0:
-            doc = db[docs[0]['_id']]
-        else:
+        doc = BrandDao.get_brand_by_name(data.name)
+        doc = db[doc['_id']]
+        if doc is None:
             logging.error('Brand with name {} doesn\'t exist.'.format(data.name))
             return
 

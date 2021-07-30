@@ -14,6 +14,7 @@ from gaia.serializer import (
     BrandSerializer,
     ArticlesWithIndexSerializer
 )
+from gaia.jobs.analyze import analyze
 from gaia.dao.article_dao import ArticleDao
 from gaia.dao.brand_dao import BrandDao
 from gaia.pagination import CursorPagination
@@ -137,7 +138,7 @@ def news_scraper(request):
                 'bucket_name': bucket_name
             }
         '''
-        label_news = Process(target=warning, args=('async task here',))
+        label_news = Process(target=analyze, args=(data["filename"],))
         label_news.start()
 
         return JsonResponse({'success': True}, status=200)
