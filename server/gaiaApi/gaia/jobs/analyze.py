@@ -73,8 +73,8 @@ def analyze(filepath: Path) -> None:
             article_sentiments = [SentimentHelper.encode_sentiment(article.sentiment) for article in articles]
             article_sentiment_score = sum(article_sentiments)
             num_articles = len(article_sentiments)
-            average_sentiment = article_sentiment_score // num_articles
-            brand.score = average_sentiment
+            average_sentiment = article_sentiment_score / num_articles
+            brand.score = (average_sentiment + num_articles) / (2 * num_articles)
             brand.sentiment = SentimentHelper.decode_sentiment(average_sentiment)
 
             brands_by_name[brand_name] = brand
