@@ -55,10 +55,10 @@ def analyze(filepath: Path) -> None:
 
     for doc in docs:
         for brand_name in doc.sentiment.keys():
-            is_existing_brand = BrandDao.get_brand_by_name(brand_name)
-            if is_existing_brand:
+            existing_brand = BrandDao.get_brand_by_name(brand_name)
+            if existing_brand is not None:
                 brands_to_update.append(brand)
-            brand = brands_by_name.get(brand_name) or is_existing_brand
+            brand = brands_by_name.get(brand_name) or existing_brand
             if brand is None:
                 brand = Brand(
                     name=brand_name,
@@ -66,8 +66,9 @@ def analyze(filepath: Path) -> None:
                     sentiment=SentimentEnum.NEUTRAL
                 )
                 brands_to_create.append(brand)
-            articles = ArticleDao.get_articles_by_brand(brand_name, 1, 1000)
-            article_sentiments = [SentimentHelper.encode_sentiment(article.sentiment.value) for article in articles]
+            article_dicts = ArticleDao.get_articles_by_brand(brand_name)
+            articles = [Article.from_dict(d) for d in article_dicts]
+            article_sentiments = [SentimentHelper.encode_sentiment(article.sentiment) for article in articles]
             article_sentiment_score = sum(article_sentiments)
             num_articles = len(article_sentiments)
             average_sentiment = article_sentiment_score // num_articles
@@ -81,4 +82,9 @@ def analyze(filepath: Path) -> None:
         BrandDao.edit_brand(brand)
     os.remove(local_filepath)
 
-# analyze("data/dataset.json")
+# analyze("guardian-news-2021-06-26.json")
+# analyze("guardian-news-2021-06-23.json")
+# analyze("guardian-news-2021-06-24.json")
+# analyze("guardian-news-2021-06-25.json")
+# analyze("guardian-news-2021-06-27.json")
+# analyze("guardian-news-2021-06-29.json")
