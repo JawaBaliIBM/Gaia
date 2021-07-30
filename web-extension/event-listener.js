@@ -2,6 +2,7 @@ const COMPANY_NAME = decodeURIComponent(
   document.location.search.split('company=')[1]
 ).toLowerCase();
 
+let isNextAvailable;
 let currentPage = 1;  
 
 document.getElementById('content-container').addEventListener('scroll', throttle(function(){
@@ -30,11 +31,12 @@ async function addDataOnScroll() {
     clientHeight
   } = document.getElementById('content-container');
 
-  if (scrollTop + clientHeight >= scrollHeight - 15) {
-
-    const data = await getCompanyData(COMPANY_NAME, currentPage);
+  if ((scrollTop + clientHeight >= scrollHeight - 15) && isNextAvailable) {
     currentPage++;
-    renderCardData(data.result);
+    const data = await getCompanyData(COMPANY_NAME, currentPage);
+    if(data) {
+      renderCardData(data.results);
+    }
   }
 }
 
@@ -120,6 +122,8 @@ async function getCompanyData(companyName, page) {
     const data = await fetch(API_URL).then(
       (res) => (res.json())
     );
+
+    isNextAvailable = data && data.next ? true: false;
     removeLoader();
     return data;
   } catch(e) {
@@ -158,7 +162,9 @@ async function init() {
   document.getElementById('brand-name').innerHTML = COMPANY_NAME;
 
   const datas = await getCompanyData(COMPANY_NAME, currentPage);
-  renderData(datas.results);  
+  if(datas) {
+    renderData(datas.results);  
+  }
 
   const brandResult = await getIndicator(COMPANY_NAME);
   if(!brandResult.error_message) renderIndicator(brandResult); 
