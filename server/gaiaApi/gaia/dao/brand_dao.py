@@ -32,6 +32,9 @@ class BrandDao:
 
     @staticmethod
     def create_bulk_brands(data: List[Brand]):
+        if len(data) == 0:
+            logging.info('Create bulk articles skipped: no data is passed.')
+            return
         dict_data = [as_dict(x) for x in data]
         if dict_data[0] is None:
             logging.error('Create bulk articles failed because failed to convert to dictionary.')
@@ -61,6 +64,7 @@ class BrandDao:
 
         selector = {'name': {'$eq': data.name}}
         doc = BrandDao.get_brand_by_name(data.name)
+        doc = db[doc['_id']]
         if doc is None:
             logging.error('Brand with name {} doesn\'t exist.'.format(data.name))
             return
