@@ -11,6 +11,7 @@
 import os
 import sys
 from pathlib import Path
+import logging
 
 sys.path.append("..")
 
@@ -27,11 +28,16 @@ from gaia.dataclass.brand import Brand
 
 
 def analyze(filepath: Path) -> None:
+    logging.info("Start analyzing")
     storage = ObjectStorage()
 
     local_filepath = NamedTemporaryFile(suffix=".json").name
     storage.download_fileobj(filepath, local_filepath)
+
+    logging.info("Finish download, analyze entities")
     docs = analyze_entity_sentiment(local_filepath)
+
+    logging.info("Finish analyzing entities for {} docs".format(len(docs)))
 
     articles = []
     brands_to_create = []
@@ -51,6 +57,7 @@ def analyze(filepath: Path) -> None:
             )
             articles.append(article)
 
+    logging.info(f"Creating articles: {len(articles)}")
     ArticleDao.create_bulk_articles(articles)
 
     for doc in docs:
@@ -79,6 +86,7 @@ def analyze(filepath: Path) -> None:
 
             brands_by_name[brand_name] = brand
 
+    logging.info(f"Creating and updating brands: {len(brands_to_create)} {len(brands_to_update)}")
     BrandDao.create_bulk_brands(brands_to_create)
     for brand in brands_to_update:
         BrandDao.edit_brand(brand)

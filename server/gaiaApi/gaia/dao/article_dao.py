@@ -27,6 +27,8 @@ class ArticleDao:
 
     @staticmethod
     def create_bulk_articles(data: List[Article]):
+        if not len(data):
+            return
         dict_data = [as_dict(x) for x in data]
         if dict_data[0] is None:
             logging.error('Create bulk articles failed because failed to convert to dictionary.')
