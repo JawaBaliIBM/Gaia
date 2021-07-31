@@ -134,7 +134,7 @@ Guide on installing Docker: [Ubuntu](https://docs.docker.com/engine/install/ubun
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/JawaBaliIBM/Gaia.git
+        git clone https://github.com/JawaBaliIBM/Gaia.git
    ```
 2. Create a Python virtual environment, and activate it
     ```sh
@@ -143,15 +143,15 @@ Guide on installing Docker: [Ubuntu](https://docs.docker.com/engine/install/ubun
     ```
 3. Install the required Python packages defined in requirements.txt
    ```sh
-   pip install -r requrements.txt
+        pip install -r requrements.txt
    ```
 4. To run the API, prepare the `server` directory with Docker Compose
    ```sh
-   docker-compose up -d
+        docker-compose up -d
    ```
 5. Run the server
    ```sh
-   python manage.py runserver
+        python manage.py runserver
    ```
 6. To run the extension, run the #### frontend
 
