@@ -42,7 +42,7 @@ class ObjectStorage:
         print('Bucket name: ', os.environ.get('BUCKET_NAME'))
         try:
             with open(dest, 'wb') as data:
-                self.client.download_fileobj(os.environ.get('BUCKET_NAME', 'news-scrapper-bucket'), filename, data)
+                self.client.download_fileobj(os.environ.get('BUCKET_NAME'), filename, data)
 
         except Exception as e:
             logging.exception('Got exception while downloading data. Exception: %s',

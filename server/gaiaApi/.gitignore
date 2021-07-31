@@ -160,5 +160,7 @@ Thumbs.db
 
 dbdata/
 
-
+.cfignore
+.ibm-project
+cli-config.yml
 # End of https://www.toptal.com/developers/gitignore/api/django
