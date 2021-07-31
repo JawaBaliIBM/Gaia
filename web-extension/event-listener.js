@@ -1,3 +1,17 @@
+const SENTIMENT_MAPPING = {
+  'positive': {
+    'type': 'success',
+    'color': 'green',
+  }, 
+  'neutral': {
+    'type': 'secondary',
+    'color': 'grey',
+  },
+  'negative': {
+    'type': 'danger',
+    'color': 'red',
+  }
+}
 const COMPANY_NAME = decodeURIComponent(
   document.location.search.split('company=')[1]
 ).toLowerCase();
@@ -64,7 +78,7 @@ function renderCardData(datas) {
 
   datas.map(data => {
     const contentCard = document.createElement('div');
-    contentCard.className = `content card border-${data.sentiment ? 'success' : 'danger' }`;
+    contentCard.className = `content card border-${SENTIMENT_MAPPING[data.sentiment].type}`;
     contentCard.innerHTML = cardString(data);
     document.getElementById('content-container').appendChild(contentCard);
   });
@@ -72,11 +86,11 @@ function renderCardData(datas) {
 
 function renderIndicator(brandIndicator) {  
   const percentage = brandIndicator.score * 100 || 0;
-  const indicator = brandIndicator.sentiment === 'positive' ? 'green' : 'red';
+  const indicator = SENTIMENT_MAPPING[brandIndicator.sentiment].color;
 
   const brandIndicatorString = `
   <img src='./images/indicator-${indicator}.png'/>
-        ${percentage}% eco-friendly brand
+        ${percentage.toFixed(2)}% eco-friendly brand
   `
   document.getElementById('brand-indicator').innerHTML = brandIndicatorString;
 }

@@ -13,7 +13,7 @@
       ],
       "js": ["content.js"]
   }],
-  "permissions": ["activeTab", "contextMenus", "tabs", "storage"],
+  "permissions": ["contextMenus", "tabs"],
   "icons": {
     "16": "/images/icon16.png",
     "36": "/images/icon36.png",
