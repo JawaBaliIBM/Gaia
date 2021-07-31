@@ -2,27 +2,11 @@ applications:
 - buildpack: python_buildpack
   command: gunicorn --env DJANGO_SETTINGS_MODULE=gaiaApi.settings gaiaApi.wsgi -b 0.0.0.0:$PORT
   disk_quota: 1G
-  domain: null
+  domain: null 
   host: null
   instances: 1
-  memory: 128MB
-  name: pythondjangoappgaia
+  memory: 192MB
+  name: my-app
   routes:
-  - route: apigaia.us-south.cf.appdomain.cloud
-  services:
-  - Cloud Object Storage-hf-38947
-  - GaiaDatabase
-  - Natural Language Understanding-hf-52786
+  - route: my-website.com
   timeout: 180
-
-  env:
-    DB_USERNAME: "apikey-v2-870441y1f0wl7obcz3mhjadmkdqpz9c8b09bl0myqe8"
-    DB_PASSWORD: "400ad65a74598206add83829c08c35bb"
-    DB_URL: "https://apikey-v2-870441y1f0wl7obcz3mhjadmkdqpz9c8b09bl0myqe8:400ad65a74598206add83829c08c35bb@56e5636b-b474-4ad0-b757-785525ec1a2d-bluemix.cloudantnosqldb.appdomain.cloud"
-    NLP_URL: "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/90738dd7-d0e0-4db9-875a-4e71efce92cd"
-    NLP_API_KEY: "wF5DNguy249ZABtRqW-3sLpIq7k3JDtObkcpLLevc3Cr"
-    BUCKET_NAME: "news-scrapper-bucket"
-    IBM_API_KEY_ID: "sNXs5VUSn7raX6lPzE0eXBB-QFBcZUNr-QrySbuPiM4r"
-    IBM_SEVICE_INSTANCE_ID: "crn:v1:bluemix:public:cloud-object-storage:global:a/7cb0cc70012a42fd9f4df7f5155fc8ac:e87f758e-9d4e-4c7f-a7dc-1203e0e2da0f:: e87f758e-9d4e-4c7f-a7dc-1203e0e2da0f"
-    ENDPOINT_URL: "https://s3.au-syd.cloud-object-storage.appdomain.cloud/"
-    SENTIMENT_MODEL_ID: "5af4b1e5-a33d-4214-aaed-36595395a97c"
