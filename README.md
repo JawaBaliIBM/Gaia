@@ -200,7 +200,7 @@ Gaia API uses a pre-trained entity model and a custom sentiment model on top of 
 
 See the [open issues](https://github.com/JawaBaliIBM/Gaia/issues) for a list of proposed features (and known issues).
 
-
+![roadmap](https://user-images.githubusercontent.com/14737318/127736609-62dfb7df-500e-47e6-a947-2e54be61fb76.png)
 
 <!-- CONTRIBUTING -->
 ## Contributing
