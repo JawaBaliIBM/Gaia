@@ -25,9 +25,7 @@ SECRET_KEY = 'django-insecure-4ix&j(1g!dwz&po_aja=l%p88#-w8vap1s%3)n&8g)z8y)#*v7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "apigaia.us-south.cf.appdomain.cloud"
-]
+ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
