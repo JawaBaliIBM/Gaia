@@ -25,7 +25,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -33,7 +32,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/JawaBaliIBM/Gaia">
-    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/web-extension/images/icon96.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/web-extension/images/icon96.png" alt="Logo">
   </a>
 
   <h3 align="center">Gaia - Gaia: Your Environment News Curator <br /> Call for Code 2021</h3>
@@ -53,7 +52,6 @@
 </p>
 
 
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
@@ -70,6 +68,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#run-gaia-web-extension-on-your-local">Run Gaia Web Extension on Your Local</a></li>
         <li><a href="#standalone-scripts">Standalone Scripts</a></li>
       </ul>
     </li>
@@ -78,8 +77,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Who We Are</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#about-the-team">About The Team</a></li>
   </ol>
 </details>
 
@@ -88,7 +86,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/product.jpg" alt="Logo" width="400" height="400">
+<img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/product.jpg" alt="Logo">
 
 Gaia is a chrome extension which curates environment news of a brand. After installing the extension, you can highlight a word containing the company name or a brand name and then you get news affiliated with it.
 
@@ -119,21 +117,10 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-Gaia runs on Javascript with Chrome Extensions API and Python with Django. To run Gaia extension on your local machine, you need to:
-
-#### Run Gaia Web Extension on Your Local
-1. After cloning the repository, open chrome browser.
-2. At the top right, click ![More](https://github.com/JawaBaliIBM/Gaia/raw/master/images/more_icon.PNG) and then More tools and then Extensions.
-3. Make sure your Developer turned on.
-
-![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/developer_on.PNG).
-
-4. Click Load Unpacked Button
-
-![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/load_unpackaged.PNG).
-
-5. Choose `web-extension` on [cloned repository](https://github.com/JawaBaliIBM/Gaia/tree/master/web-extension).
-6. You have web extension run locally on your browser.
+- Python 3.7
+- Have Docker installed on your machine.
+Guide on installing Docker: [Ubuntu](https://docs.docker.com/engine/install/ubuntu/), [Mac or Windows](https://docs.docker.com/desktop/)
+- (Recommended for running scripts) Have `pip` installed on your machine. [More details](https://pypi.org/project/pip/).
 
 ### Installation
 
@@ -158,8 +145,20 @@ Gaia runs on Javascript with Chrome Extensions API and Python with Django. To ru
    ```sh
         python manage.py runserver
    ```
-6. To run the extension, run the #### frontend
 
+### Run Gaia Web Extension on Your Local
+1. After cloning the repository, open chrome browser.
+2. At the top right, click ![More](https://github.com/JawaBaliIBM/Gaia/raw/master/images/more_icon.PNG) and then More tools and then Extensions.
+3. Make sure your Developer turned on.
+
+![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/developer_on.PNG).
+
+4. Click Load Unpacked Button
+
+![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/load_unpackaged.PNG).
+
+5. Choose `web-extension` on [cloned repository](https://github.com/JawaBaliIBM/Gaia/tree/master/web-extension).
+6. You have web extension run locally on your browser.
 
 ### Standalone Scripts
 
@@ -184,17 +183,10 @@ To run the scripts with Python, you can follow the steps below:
         python <file_name>.py
    ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 <!-- INFRASTRUCTURE -->
 ## Infrastructure
   <a href="https://github.com/JawaBaliIBM/Gaia">
-    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/infrastructure.jpeg" alt="Infrastructure" width="500" height="300">
+    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/infrastructure.jpeg" alt="Infrastructure">
   </a>
 
 Gaia Chrome Extension communicates with Gaia API to retrieve news related to a brand.
@@ -231,7 +223,7 @@ Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## Who We Are
+## About The Team
 
 #### JavaBali Team
 
@@ -259,5 +251,3 @@ Project Link: [Gaia](https://github.com/JawaBaliIBM/Gaia)
 [issues-url]: https://github.com/JawaBaliIBM/Gaia.svg/issues
 [license-shield]: https://img.shields.io/github/license/JawaBaliIBM/Gaia.svg?style=for-the-badge
 [license-url]: https://github.com/JawaBaliIBM/Gaia.svg/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
