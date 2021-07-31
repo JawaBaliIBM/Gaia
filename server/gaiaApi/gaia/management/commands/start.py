@@ -13,5 +13,5 @@ class Command(BaseCommand):
         parser.add_argument('addrport', nargs='?', default='0.0.0.0:' + str(PORT), help='Optional ipaddr:port')
 
     def handle(self, *args, **options):
-        cmd = ['gunicorn', '-b', options['addrport'], 'gaiaApp.wsgi']
+        cmd = ['gunicorn', '-b', options['addrport'], 'pythondjangoapp.wsgi']
         subprocess.call(cmd)
