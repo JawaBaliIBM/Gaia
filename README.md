@@ -121,14 +121,19 @@ To get a local copy up and running follow these simple steps.
 
 Gaia runs on Javascript with Chrome Extensions API and Python with Django. To run Gaia extension on your local machine, you need to:
 
-1. #### Frontend stuff 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-2. Have Docker installed on your machine.
-Guide on installing Docker: [Ubuntu](https://docs.docker.com/engine/install/ubuntu/), [Mac or Windows](https://docs.docker.com/desktop/)
-3. (Recommended for running scripts) Have `pip` installed on your machine. More details [https://pypi.org/project/pip/].
+#### Run Gaia Web Extension on Your Local
+1. After cloning the repository, open chrome browser.
+2. At the top right, click ![More](https://github.com/JawaBaliIBM/Gaia/raw/master/images/more_icon.PNG) and then More tools and then Extensions.
+3. Make sure your Developer turned on.
+
+![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/developer_on.PNG).
+
+4. Click Load Unpacked Button
+
+![Developer Mode](https://github.com/JawaBaliIBM/Gaia/raw/master/images/load_unpackaged.PNG).
+
+5. Choose `web-extension` on [cloned repository](https://github.com/JawaBaliIBM/Gaia/tree/master/web-extension).
+6. You have web extension run locally on your browser.
 
 ### Installation
 
