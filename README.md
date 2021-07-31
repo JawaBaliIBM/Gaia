@@ -88,7 +88,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Gaia Extension][product-screenshot]](https://github.com/JawaBaliIBM/Gaia/raw/master/images/product.jpg)
+<img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/product.jpg" alt="Logo" width="400" height="400">
 
 Gaia is a chrome extension which curates environment news of a brand. After installing the extension, you can highlight a word containing the company name or a brand name and then you get news affiliated with it.
 
@@ -113,7 +113,7 @@ They can keep you updated on the environmental impact of a certain brand. Gaia h
 
 To use the production version of Gaia, install Gaia Chrome Extension to use it directly on your Chrome browser.
 
-Get this extension for free: []()
+Get this extension for free: [pending, awaiting review]()
 
 To get a local copy up and running follow these simple steps.
 
@@ -139,13 +139,26 @@ Gaia runs on Javascript with Chrome Extensions API and Python with Django. To ru
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/JawaBaliIBM/Gaia.git
+        git clone https://github.com/JawaBaliIBM/Gaia.git
    ```
-2. To run the API, run the `server` directory with Docker Compose
+2. Create a Python virtual environment, and activate it
+    ```sh
+        virtualenv env
+        source env/bin/activate
+    ```
+3. Install the required Python packages defined in requirements.txt
    ```sh
-   docker-compose up
+        pip install -r requrements.txt
    ```
-3. To run the extension, run the #### frontend
+4. To run the API, prepare the `server` directory with Docker Compose
+   ```sh
+        docker-compose up -d
+   ```
+5. Run the server
+   ```sh
+        python manage.py runserver
+   ```
+6. To run the extension, run the #### frontend
 
 
 ### Standalone Scripts
@@ -157,9 +170,9 @@ Several standalone scripts are available for news scraping and model training pu
 
 To run the scripts with Python, you can follow the steps below:
 
-1. Create a Python virtual environment folder, and activate it
+1. Create a Python virtual environment, and activate it
     ```sh
-        python -m venv env
+        virtualenv env
         source env/bin/activate
     ```
 2. Install the required Python packages defined in requirements.txt
@@ -168,7 +181,7 @@ To run the scripts with Python, you can follow the steps below:
    ```
 3. Run the necessary scripts
    ```sh
-        python <file_name.py>
+        python <file_name>.py
    ```
 
 <!-- USAGE EXAMPLES -->
@@ -181,9 +194,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- INFRASTRUCTURE -->
 ## Infrastructure
   <a href="https://github.com/JawaBaliIBM/Gaia">
-    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/infrastructure.jpeg" alt="Logo" width="80" height="80">
+    <img src="https://github.com/JawaBaliIBM/Gaia/raw/master/images/infrastructure.jpeg" alt="Infrastructure" width="500" height="300">
   </a>
 
+Gaia Chrome Extension communicates with Gaia API to retrieve news related to a brand.
+
+Gaia API uses IBM Cloud Function to curate news from The Guardian Open Platform daily, saves them in a form of JSON file saved in IBM Object Storage, and posts a request to analyze the named-entities and sentiment about the article.
+
+Gaia API uses a pre-trained entity model and a custom sentiment model on top of IBM Cloud NLU. The custom sentiment model is trained on approximately 250 data points, using news extracted from The Guardian Open Platform. The brand and article information is saved in IBM Cloudant.
 
 <!-- ROADMAP -->
 ## Roadmap
