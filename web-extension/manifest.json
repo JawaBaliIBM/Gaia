@@ -1,7 +1,7 @@
 {
   "name": "Gaia",
   "description": "A chrome extension that curates environmental news of a company",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "service-worker.js"
@@ -13,7 +13,7 @@
       ],
       "js": ["content.js"]
   }],
-  "permissions": ["contextMenus", "tabs"],
+  "permissions": ["contextMenus"],
   "icons": {
     "16": "/images/icon16.png",
     "36": "/images/icon36.png",
