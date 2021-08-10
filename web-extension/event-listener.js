@@ -130,6 +130,7 @@ function removeLoader() {
 }
 
 async function getCompanyData(companyName, page) {
+  if (!companyName) return;
   addLoader();
   try { 
     const API_URL = `https://apigaia.us-south.cf.appdomain.cloud/articles/${companyName}/?page=${page}`;
@@ -148,6 +149,7 @@ async function getCompanyData(companyName, page) {
 }
 
 async function getIndicator(companyName) {
+  if (!companyName) return;
   addLoader();
   try {
     const API_URL = `https://apigaia.us-south.cf.appdomain.cloud/brand/${companyName}/`;
@@ -173,15 +175,17 @@ function showError() {
 }
 
 async function init() {  
-  document.getElementById('brand-name').innerHTML = COMPANY_NAME;
+  if(COMPANY_NAME !== 'undefined') {
+    document.getElementById('brand-name').innerHTML = COMPANY_NAME;
 
-  const datas = await getCompanyData(COMPANY_NAME, currentPage);
-  if(datas) {
-    renderData(datas.results);  
+    const datas = await getCompanyData(COMPANY_NAME, currentPage);
+    if(datas) {
+      renderData(datas.results);  
+    }
+
+    const brandResult = await getIndicator(COMPANY_NAME);
+    if(!brandResult.error_message) renderIndicator(brandResult); 
   }
-
-  const brandResult = await getIndicator(COMPANY_NAME);
-  if(!brandResult.error_message) renderIndicator(brandResult); 
 }
 
 init();
